@@ -1,0 +1,187 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"title": "JSON schema for Elastic Common Schema field definitions.",
+	"type": "array",
+	"items": {
+		"type": "object",
+		"additionalProperties": true,
+		"required": [ "name", "title", "description", "fields" ],
+		"properties": {
+			"name": {
+			    "title": "name",
+				"description": "Name of the field set, lowercased and with underscores to separate words.",
+				"type": "string"
+			},
+			"title": {
+			    "title": "title",
+				"description": "Capitalized name of the field set with spaces to separate words. For use in documentation section titles.",
+				"type": "string"
+			},
+			"description": {
+			    "title": "description",
+				"description": "Description of the field set. Two subsequent newlines create a new paragraph.",
+				"type": "string"
+			},
+			"fields": {
+			    "title": "fields",
+				"description": "An array of objects defining the individual fields in the field set.",
+				"type": "array",
+				"items": {
+					"type": "object",
+					"required": [ "name", "level", "type", "description" ],
+					"properties": {
+						"name": {
+						    "title": "fields.$field.name",
+							"description": "Name of the field",
+							"type": "string"	
+						},
+						"level": {
+						    "title": "fields.$field.level",
+							"description": "One of: core, extended. ECS level of maturity of the field.",
+							"type": "string",
+							"enum": [ "core", "extended" ]
+						},
+						"type": {
+						    "title": "fields.$field.type",
+							"description": "Type of the field.",
+							"type": "string"
+						},
+						"description": {
+						    "title": "fields.$field.description",
+							"description": "Description of the field",
+							"type": "string"
+						},
+						"short": {
+						    "title": "fields.$field.short",
+							"description": "Short version of the description to display in small spaces.",
+							"type": "string"
+						},
+						"example": {
+						    "title": "fields.$field.example",
+							"description": "A single value example of what can be expected in this field.",
+							"type": "string"
+						},
+						"multi_fields": {
+						    "title": "fields.$field.multi_field",
+							"description": "Define additional data types this field will also index.",
+							"type": "array",
+							"items": {
+								"type": "object",
+								"required": [ "type" ],
+								"properties": {
+									"type": {
+										"description": "Type of the multi_field",
+										"type": "string"
+									},
+									"name": {
+										"description": "Name of the multi_field",
+										"type": "string"
+									}
+								}
+							}
+						},
+						"index": {
+						    "title": "fields.$field.index",
+							"description": "If `False`, means field is not indexed.",
+							"type": "boolean"
+						},
+						"format": {
+						    "title": "fields.$field.format",
+							"description": "Field format that can be used in a Kibana index template.",
+							"type": "string"
+						},
+						"normalize": {
+						    "title": "fields.$field.normalize",
+							"description": "Normalization steps that should be applied at ingestion time.",
+						    "type": "array",
+							"items": {
+								"type": "string",
+								"enum": [ "array" ]
+							}	
+						},
+						"beta": {
+						    "title": "fields.$field.beta",
+							"description": "Adds a beta marker for the field to the field's description. The text provided in this attribute is used as content of the beta marker in the documentation.",
+							"type": "string"
+						}
+					}
+				}
+			},
+			"short": {
+			    "title": "short",
+				"description": "Short version of the description to display in small spaces, such as the list of field sets. Short descriptions must not have newlines. Defaults to the main description when absent. If hte main description has multiple paragraphs, then a `short` description with no newlines is required.",
+				"type": "string"
+			},
+			"root": {
+			    "title": "root",
+				"description": "Whether or not the fields of this field should be namespaced under the field set name.",
+				"type": "boolean"
+			},
+			"group": {
+			    "title": "group",
+				"description": "To sort field sets against one another. For example, the 'base' field set has a group=1 and is the first listed in the document. All others have group=2 and are therefore after the 'base' (sorted alphabetically).",
+				"type": "integer"
+			},
+			"type": {
+			    "title": "type",
+				"description": "At this level, should always be `group`.",
+				"type": "string",
+				"enum": [ "group" ]
+			},
+			"reuseable": {
+			    "title": "reusable",
+				"description": "Used to identify which field sets are expected to be reused in multiple places. See 'Field set reuse' for details.",
+				"type": "object",
+				"required": [ "expected" ],
+				"properties": {
+					"expected": {
+					    "title": "reusable.expected",
+						"description": "List of places the field set's fields are expected. There are two valid notations to list expected locations.",
+						"type": "array",
+						"items": {
+							"type": "object",
+							"required": [ "at", "as" ],
+							"properties": {
+								"at": {
+								    "title": "reusable.expected.at",
+									"description": "The location where the field set will be reused at.",
+									"type": "string"
+								},
+								"as": {
+								    "title": "reusable.expected.as",
+									"description": "The name of the field set where it's reused.",
+									"type": "string"
+								},
+								"beta": {
+								    "title": "reusable.expected.title",
+									"description": "If the field reuse is considered beta, provides a hover tooltip text for the docs.",
+									"type": "string"
+								},
+								"short_override": {
+								    "title": "reusable.expected.short_override",
+									"description": "Set the short description of the nested field, instead of defaulting to the top-level field set's short description.",
+									"type": "string"
+								}
+							}
+						}
+					},
+					"top_level": {
+					    "title": "reusable.top_level",
+						"description": "Is this field set expected at the root of events or is it only expected in the nested locations?",
+						"type": "boolean" 
+					}
+				}
+			},
+			"short_override": {
+			    "title": "short_override",
+				"description": "Used to override the top-level field set's short description when nesting.",
+				"type": "string"
+			},
+			"beta": {
+			    "title": "beta",
+				"description": "Adds a beta marker for the entire field set. The text provided in this attribute is used as content of the beta marker in the documentation. Beta notices should not have newlines.",
+				"type": "string"
+			}
+		}
+	}
+}
