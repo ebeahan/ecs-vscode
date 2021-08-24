@@ -59,7 +59,7 @@
 						"example": {
 						    "title": "fields.$field.example",
 							"description": "A single value example of what can be expected in this field.",
-							"type": "string"
+							"type": [ "string", "number" ]
 						},
 						"multi_fields": {
 						    "title": "fields.$field.multi_field",
