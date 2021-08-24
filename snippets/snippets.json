@@ -1,0 +1,52 @@
+{
+	"New ECS field": {
+		"prefix": "field (ECS)",
+		"body": [
+			"- name: $1",
+			"  level: ${2:extended}",
+			"  type: ${3:keyword}", 
+			"  short: $4",
+			"  description: >",
+			"     $5",
+			"  example: $6"
+		],
+		"description": "Create a new ECS field"
+	},
+	"New ECS field set": {
+		"prefix": "field set (ECS)",
+		"body": [
+			"---",
+			"- name: ${1:$TM_FILENAME_BASE}",
+			"  title: $2",
+			"  group: ${3:2}",
+			"  short: $4",
+			"  description: >",
+			"    $5",
+			"  type: ${6:group}",
+			"",
+			"  fields:",
+			"",
+			"    - name: $7",
+			"      level: ${8:extended}",
+			"      type: ${9:keyword}",
+			"      short: $10",
+			"      description: >",
+			"        $11",
+			"      example: $12",
+			""
+		],
+		"description": "Create a new ECS field set"
+	},
+	"Reuseable ECS configuration": {
+		"prefix": "reusable (ECS)",
+		"body": [
+			"reusable:",
+			"  top_level: ${1:true}",
+			"  expected:",
+			"    - at: $2",
+			"      as: ${3:$TM_FILENAME_BASE}",
+			""
+		],
+		"description": "Define a reusable ECS field configuration"
+	}
+}
