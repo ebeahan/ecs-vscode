@@ -80,6 +80,35 @@
 								}
 							}
 						},
+						"allowed_values": {
+							"title": "fields.$field.allowed_values",
+							"description": "List of objects of the expected values for this field.",
+							"type": "array",
+							"items": {
+								"type": "object",
+								"required": [ "value", "description" ],
+								"properties": {
+									"name": {
+										"title": "fields.$field.allowed_values.name",
+										"description": "Name of the allowed value.",
+										"type": "string"
+									},
+									"description": {
+										"title": "fields.$field.allowed_values.description",
+										"description": "Description of the allowed value.",
+										"type": "string"
+									},
+									"expected_event_types": {
+										"title": "fields.$field.allowed_values.expected_event_types",
+										"description": "Expected event types allowed for the values of this field.",
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
 						"index": {
 						    "title": "fields.$field.index",
 							"description": "If `False`, means field is not indexed.",
