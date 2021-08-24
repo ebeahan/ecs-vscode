@@ -86,7 +86,7 @@
 							"type": "array",
 							"items": {
 								"type": "object",
-								"required": [ "value", "description" ],
+								"required": [ "name", "description" ],
 								"properties": {
 									"name": {
 										"title": "fields.$field.allowed_values.name",
