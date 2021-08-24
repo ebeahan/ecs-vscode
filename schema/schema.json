@@ -128,7 +128,7 @@
 				"type": "string",
 				"enum": [ "group" ]
 			},
-			"reuseable": {
+			"reusable": {
 			    "title": "reusable",
 				"description": "Used to identify which field sets are expected to be reused in multiple places. See 'Field set reuse' for details.",
 				"type": "object",
