@@ -17,5 +17,6 @@
 			}
 		]
 	},
-	"publisher": "EricBeahan"
+	"publisher": "EricBeahan",
+	"repository": "https://github.com/ebeahan/ecs-vscode"
 }
